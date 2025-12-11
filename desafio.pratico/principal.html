@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Estoque - Principal</title>
+</head>
+<body>
+    <h1>Bem-vindo, {{ username }}!</h1>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('cadastro_produto') }}">Cadastro de Produto (Entrega 6)</a></li>
+            <li><a href="{{ url_for('gestao_estoque') }}">Gestão de Estoque (Entrega 7)</a></li>
+            <li><a href="{{ url_for('logout') }}" style="color: red;">Sair (Logout)</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

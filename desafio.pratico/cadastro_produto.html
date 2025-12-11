@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto</title>
+</head>
+<body>
+
+    <h2>Cadastro de Produto (CRUD)</h2>
+    <p><a href="{{ url_for('principal') }}">Voltar para o Menu Principal</a></p>
+
+    <!-- FORMULÁRIO DE INSERÇÃO -->
+    <h3>Inserir Novo Produto</h3>
+    <form method="POST" action="{{ url_for('cadastro_produto') }}">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required>
+        <button type="submit">Salvar Produto</button>
+    </form>
+
+    <!-- BUSCA -->
+    <h3>Listagem de Produtos</h3>
+    <form method="GET" action="{{ url_for('cadastro_produto') }}">
+        <input type="text" name="search" placeholder="Buscar por nome..." value="{{ search_term or '' }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Estoque Atual</th>
+                <th>Unidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if produtos %}
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.id_produto }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.estoque_atual }}</td>
+                    <td>{{ produto.unidade_medida }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_produto', id_produto=produto.id_produto) }}">Editar</a> |
+                        <a href="{{ url_for('excluir_produto', id_produto=produto.id_produto) }}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="5">Nenhum produto encontrado.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</body>
+</html>

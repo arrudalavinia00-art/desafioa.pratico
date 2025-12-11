@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Estoque</title>
+</head>
+<body>
+    <h2>Gestão de Estoque</h2>
+    <p><a href="{{ url_for('principal') }}">Voltar para o Menu Principal</a></p>
+
+    {% if alerta_estoque_minimo %}
+        <h3 style="color: red;">{{ alerta_estoque_minimo }}</h3>
+    {% endif %}
+
+    <h3>Registrar Movimentação</h3>
+    <form method="POST" action="{{ url_for('gestao_estoque') }}">
+        <div>
+            <label for="produto_id">Produto (Ordem Alfabética):</label>
+            <select name="produto_id" required>
+                {% for prod in produtos %}
+                <option value="{{ prod.id_produto }}">{{ prod.nome }} (Estoque: {{ prod.estoque_atual }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="tipo_movimentacao">Tipo:</label>
+            <select name="tipo_movimentacao" required>
+                <option value="E">Entrada</option>
+                <option value="S">Saída</option>
+            </select>
+        </div>
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" name="quantidade" step="0.01" required>
+        </div>
+        <div>
+            <label for="data_movimentacao">Data da Movimentação:</label>
+            <input type="date" name="data_movimentacao" required>
+        </div>
+        <div>
+            <label for="data_validade">Data de Validade (Opcional):</label>
+            <input type="date" name="data_validade">
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+    
+    <hr>
+    <h3>Histórico de Movimentações (RF09)</h3>
+    </body>
+</html>
